@@ -1,0 +1,35 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <div>
+      <h3 class="text-white">{{plan.name}}</h3>
+      <a href="{% url 'add_workout' plan.id %}" class="btn btn-primary">Add Workout</a>
+    </div>
+    <div class="row my-5">
+      {% for workout in all_workouts %}
+      <div class="col-xl-4 col-lg-12">
+        <div class="card">
+          <div class="card-header card-header-info">
+            <h4 class="card-title">{{workout.name}}</h4>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Target Muscles: {{workout.target}}</h4>
+            <ul>
+              {% for set in workout.sets_set.all %}
+                <li>{{set.exercise}}</li>
+              {% endfor %}
+            </ul>
+            <a href="{% url 'play_workout' workout.id %}" class="btn btn-sm rounded-3 btn-success">Play Workout</a>
+            <a href="{% url 'add_sets' workout.id %}" class="btn btn-primary btn-sm">Add Sets</a>
+            <button class="btn btn-info btn-sm">Edit</button>
+            <button class="btn btn-danger btn-sm">Delete</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="content">
+    <div class="container-fluid">
+        <div class="card card-nav-tabs text-center">
+          <div class="card-header card-header-primary">
+            Create A New Workout Plan
+          </div>
+          <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="row my-5">
+                    <div class="col">
+                        {{form.name}}
+                    </div>
+                    <div class="col">
+                        {{form.days}}
+                    </div>
+                </div>
+                <div class="row my-5">
+                    <div class="col">
+                        {{form.type}}
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Add Plan">
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

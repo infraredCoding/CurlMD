@@ -1,0 +1,29 @@
+{% extends 'landing/base.html' %}
+
+{% block content %}
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      {% for plan in all_plans %}
+      <div class="col-xl-4 col-lg-12">
+        <div class="card">
+          <div class="card-header {% if plan.status == 'Active' %} card-header-success {% else %} card-header-primary {% endif %}">
+            <h4 class="card-title">{{plan.name}}</h4>
+          </div>
+          <div class="card-body">
+            <h4 class="card-title">Days: {{plan.days}}</h4>
+            <p class="card-category">Type: {{plan.type}}</p>
+            {% if plan.status == 'Active' %}
+              <button class="btn btn-success btn-sm">Active</button>
+            {% else %}
+              <a href="{% url 'make_active' plan.id %}" class="btn btn-info btn-sm">Make Active</a>
+            {% endif %}
+            <a href="{% url 'view_plan' plan.id %}" class="btn btn-primary btn-sm">View</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
